@@ -6,7 +6,7 @@ import { getAllFiles } from "../utils/file.js";
 import { uploadFile } from "../s3/uploadToS3.js"
 import {createClient} from "redis";
 import type { Request, Response } from 'express';
-import {clearBuildFolders} from "../utils/ clearFolder.js"
+import {clearBuildFolders} from "../utils/clearFolder.js"
 
 
 const publisher = createClient();

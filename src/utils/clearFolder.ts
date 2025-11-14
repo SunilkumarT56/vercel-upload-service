@@ -15,5 +15,6 @@ export async function clearBuildFolders() {
     if (stderr) console.error("stderr:", stderr);
   } catch (error) {
     console.error("clearBuildFolders() Error:", error);
+    
   }
 }
