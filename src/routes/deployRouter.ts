@@ -3,6 +3,6 @@ import { deployService } from "../controllers/deployController.js";
 
 const router = express.Router();
 
-router.post("/" , deployService);
+router.post("/deploy" , deployService);
 
 export default router;
