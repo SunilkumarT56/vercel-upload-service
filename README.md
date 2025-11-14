@@ -19,13 +19,6 @@ This README documents the **full architecture**, **flow**, and **engineering beh
 
 ---
 
-## **Architecture**
-> Export your Excalidraw and name it: `architecture.jpeg`
-
-```
-![Architecture](./architecture.jpeg)
-```
-
 ---
 
 ## **System Components**
