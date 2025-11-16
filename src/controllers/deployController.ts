@@ -9,12 +9,7 @@ import type { Request, Response } from 'express';
 import {clearBuildFolders} from "../utils/clearFolder.js"
 
 
-const publisher = createClient({
-  socket: {
-    host: process.env.REDIS_HOST || "redis",
-    port: Number(process.env.REDIS_PORT) || 6379,
-  }
-});
+const publisher = createClient();
 publisher.connect().catch(console.error);
 publisher.on("ready", () => console.log("✅ Redis connected"));
 publisher.on("error", err => console.error("❌ Redis error:", err));
