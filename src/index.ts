@@ -5,6 +5,8 @@ import deployRouter from "./routes/deployRouter.js";
 import webhookRouter from "./routes/webhookRoutes.js";
 import bodyParser from "body-parser";
 dotenv.config();
+import { connectDB } from "./conifg/db.js";
+await connectDB();
 
 const PORT = process.env.PORT;
 

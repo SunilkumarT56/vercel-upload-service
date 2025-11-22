@@ -8,6 +8,8 @@ import { createClient } from "redis";
 import type { Request, Response } from "express";
 import { clearBuildFolders } from "../utils/clearFolder.js";
 import { Redis } from "ioredis";
+import Repo from "../models/Repo.js";
+import { deletePrefix } from "../s3/DeleteS3Files.js";
 
 const publisher = createClient();
 const pub = new Redis();
@@ -25,7 +27,16 @@ export const deployService = async function (req: Request, res: Response) {
   if (!repo_url) {
     return res.status(400).json({ error: "No repo URL provided" });
   }
-  const id = uuid();
+  let id = uuid();
+  const RepoData = await Repo.findOne({ repoUrl: repo_url });
+  if (RepoData) {
+    id = RepoData.repoId;
+    const prefix = `output/${id}`;
+    await deletePrefix(prefix);
+  }
+  else{
+  const repo = await Repo.create({ repoUrl: repo_url, repoId: id });
+  }
   pub.publish(`logs:${id}`, `cloning the repo${repo_url}`);
   await git.clone(repo_url, path.join(__dirname, `../../output/${id}`));
   const files = getAllFiles(path.join(__dirname, `../../output/${id}`));
