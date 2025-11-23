@@ -4,7 +4,6 @@ import { s3 } from "./s3Client.js";
 const bucket = process.env.AWS_S3_BUCKET!;
 
 export async function deletePrefix(prefix: string) {
-  // Ensure prefix always ends with "/"
   if (!prefix.endsWith("/")) {
     prefix = prefix + "/";
   }
@@ -16,7 +15,6 @@ export async function deletePrefix(prefix: string) {
     })
   );
 
-  // Delete all contents
   if (listed.Contents && listed.Contents.length > 0) {
     const toDelete = listed.Contents.map((f) => ({ Key: f.Key }));
 
